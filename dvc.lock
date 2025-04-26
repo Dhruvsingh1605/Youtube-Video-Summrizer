@@ -1,0 +1,44 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python3 src/Youtube_Audio.py
+    deps:
+    - path: src/Youtube_Audio.py
+      hash: md5
+      md5: 0cd68f510e033b1e3bfe502b05c7db32
+      size: 1770
+      isexec: true
+    outs:
+    - path: Data/downloaded_audio.wav
+      hash: md5
+      md5: 213b04fedbb91c9f077106a1f3bc76e5
+      size: 1821266
+      isexec: true
+  audio_to_text:
+    cmd: python3 src/Audio-text.py
+    deps:
+    - path: Data/downloaded_audio.wav
+      hash: md5
+      md5: 213b04fedbb91c9f077106a1f3bc76e5
+      size: 1821266
+      isexec: true
+    outs:
+    - path: text-data/downloaded_audio.txt
+      hash: md5
+      md5: 01485d34f00e6d9f78b0f95b911d4fe8
+      size: 174
+      isexec: true
+  summarization:
+    cmd: python3 src/Summarization.py
+    deps:
+    - path: text-data/downloaded_audio.txt
+      hash: md5
+      md5: 01485d34f00e6d9f78b0f95b911d4fe8
+      size: 174
+      isexec: true
+    outs:
+    - path: summarised-data/downloaded_audio_summary.txt
+      hash: md5
+      md5: a66a3030ff332e9d1ee1786b03b10ea2
+      size: 130
+      isexec: true

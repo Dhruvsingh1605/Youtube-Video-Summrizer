@@ -1,0 +1,21 @@
+stages:
+  get_data:
+    cmd: python3 src/Youtube_Audio.py
+    deps:
+      - src/Youtube_Audio.py             
+    outs:
+      - Data/downloaded_audio.wav        
+
+  audio_to_text:
+    cmd: python3 src/Audio-text.py
+    deps:
+      - Data/downloaded_audio.wav        
+    outs:
+      - text-data/downloaded_audio.txt   
+
+  summarization:
+    cmd: python3 src/Summarization.py
+    deps:
+      - text-data/downloaded_audio.txt   
+    outs:
+      - summarised-data/downloaded_audio_summary.txt  
